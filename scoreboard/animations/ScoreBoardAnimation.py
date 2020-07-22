@@ -18,35 +18,35 @@ class ScoreBoardAnimation(BaseStripAnim):
 
     # name of home team section, start and end index of strip
     homeSectionStart = 0
-    homeSectionEnd   = 239
+    homeSectionEnd   = 89
     homeSectionRows  = 5
 
     # timer section, start and end index of strip
-    timerSectionStart = 0
-    timerSectionEnd   = 239
+    timerSectionStart = 90
+    timerSectionEnd   = 174
     timerSectionRows  = 5
 
     # name of away team section, start and end index of strip
-    awaySectionStart = 200
-    awaySectionEnd   = 299
+    awaySectionStart = 175
+    awaySectionEnd   = 264
     awaySectionRows  = 5
 
     # score of home team section, start and end index of strip
-    homeScoreSection1Start = 0
-    homeScoreSection1End   = 14
+    homeScoreSection1Start = 265
+    homeScoreSection1End   = 279
     homeScoreSection1Rows  = 5
     homeScore              = 17
-    homeScoreSection2Start = 15
-    homeScoreSection2End   = 29
+    homeScoreSection2Start = 280
+    homeScoreSection2End   = 294
     homeScoreSection2Rows  = 5
 
     # score of away team section, start and end index of strip
-    awayScoreSection1Start = 30
-    awayScoreSection1End   = 44
+    awayScoreSection1Start = 295
+    awayScoreSection1End   = 309
     awayScoreSection1Rows  = 5
     awayScore              = 30
-    awayScoreSection2Start = 45
-    awayScoreSection2End   = 59
+    awayScoreSection2Start = 310
+    awayScoreSection2End   = 324
     awayScoreSection2Rows  = 5
 
     def __init__(self, led, animationTime, message):
@@ -67,15 +67,15 @@ class ScoreBoardAnimation(BaseStripAnim):
             self.stop()
 
         # draw all the sections
-        # self.drawHomeSection(self.homeSectionStart, self.homeSectionEnd, self.homeSectionRows)
-        # self.drawTimerSection(self.timerSectionStart, self.timerSectionEnd, self.timerSectionRows)
+        self.drawHomeSection(self.homeSectionStart, self.homeSectionEnd, self.homeSectionRows)
+        self.drawTimerSection(self.timerSectionStart, self.timerSectionEnd, self.timerSectionRows)
 
-        # self.drawAwaySection(self.awaySectionStart, self.awaySectionEnd, self.awaySectionRows)
+        self.drawAwaySection(self.awaySectionStart, self.awaySectionEnd, self.awaySectionRows)
 
-        # self.drawHomeScoreSection1(self.homeScoreSection1Start, self.homeScoreSection1End, self.homeScoreSection1Rows)
-        # self.drawHomeScoreSection2(self.homeScoreSection2Start, self.homeScoreSection2End, self.homeScoreSection2Rows)
-        # self.drawAwayScoreSection1(self.awayScoreSection1Start, self.awayScoreSection1End, self.awayScoreSection1Rows)
-        # self.drawAwayScoreSection2(self.awayScoreSection2Start, self.awayScoreSection2End, self.awayScoreSection2Rows)
+        self.drawHomeScoreSection1(self.homeScoreSection1Start, self.homeScoreSection1End, self.homeScoreSection1Rows)
+        self.drawHomeScoreSection2(self.homeScoreSection2Start, self.homeScoreSection2End, self.homeScoreSection2Rows)
+        self.drawAwayScoreSection1(self.awayScoreSection1Start, self.awayScoreSection1End, self.awayScoreSection1Rows)
+        self.drawAwayScoreSection2(self.awayScoreSection2Start, self.awayScoreSection2End, self.awayScoreSection2Rows)
 
         self._step += amt
 
@@ -115,7 +115,7 @@ class ScoreBoardAnimation(BaseStripAnim):
 
         colorAlgorithm = RainbowColorAlgorithm()
 
-        messageAlgorithm = ScrollLeftMessageAlgorithmStrip(colorAlgorithm)
+        messageAlgorithm = StandingMessageAlgorithmStrip(colorAlgorithm)
         messageAlgorithm.animateLED(self._led, self._step, word, startIndex, endIndex, rows)
 
 

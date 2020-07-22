@@ -4,11 +4,16 @@ from bibliopixel.drivers.PiWS281X import *
 import sys
 
 #create biblio pixel driver and led
-thread     = False   # display updates to run in background thread
-brightness = 100     # brightness 0-255
-driver     = PiWS281X(325)
-led        = Strip(driver, thread, brightness)
+thread             = False   # display updates to run in background thread
+brightness         = 100     # brightness 0-255
+numTeamNameNumLeds = 18*5    # number of leds in the team name
+numTimerLeds       = 17*5    # number of leds in the timer section
+numScoreLeds       = 3*5     # number of leds in for a single number
+driver             = PiWS281X(numTeamNameNumLeds*2 + numTimerLeds + numScoreLeds*4)
+led                = Strip(driver, thread, brightness)
+scrollDelay        = 0.5
+timerSeconds       = 1200
 
 #run animation
-anim  = ScoreBoardUpdateAnimation(led, 1200, .05)
+anim  = ScoreBoardUpdateAnimation(led, timerSeconds, scrollDelay)
 anim.run()
