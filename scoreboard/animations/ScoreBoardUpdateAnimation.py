@@ -6,11 +6,15 @@ from ..algorithms.RainbowColorAlgorithm           import RainbowColorAlgorithm  
 from ..parsers.StandardMessageParser              import StandardMessageParser # import the parser
 from ..parsers.TimeMessageParser                  import TimeMessageParser # import the parser
 from ..characters.MessageCharacters5x3            import MessageCharacters5x3  # import the character set
+import json
 import time
 import threading
 
 class ScoreBoardUpdateAnimation(BaseStripAnim):
 
+    _scoresPath = "../../scores.json"
+
+    # the delay between refreshing the scroll algorithm
     _delay   = 0.01
 
     # time to run the animation, in seconds, and time the animation started
@@ -73,6 +77,13 @@ class ScoreBoardUpdateAnimation(BaseStripAnim):
         if time.time() - self._animationStartTime > self._animationTime:
             self.stop()
             self.isRunning.set()
+
+        # set scores
+        scores = "{}"
+        with open(self._scoresPath) as f:
+            scores = json.load(f)
+        self.awayScore = scores['awayScore']
+        self.homeScore = scores['homeScore']
 
         # draw all the sections
         self.drawHomeSection(self.homeSectionStart, self.homeSectionEnd, self.homeSectionRows)
