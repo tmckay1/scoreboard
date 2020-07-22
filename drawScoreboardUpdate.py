@@ -11,9 +11,13 @@ numTimerLeds       = 17*5    # number of leds in the timer section
 numScoreLeds       = 3*5     # number of leds in for a single number
 driver             = PiWS281X(numTeamNameNumLeds*2 + numTimerLeds + numScoreLeds*4)
 led                = Strip(driver, thread, brightness)
-scrollDelay        = 0.5
-timerSeconds       = 1200
+
+# setup animation
+scrollDelay  = 0.25
+timerSeconds = 1200
+homeName     = "Home"
+awayName     = "Away"
 
 #run animation
-anim  = ScoreBoardUpdateAnimation(led, timerSeconds, scrollDelay)
+anim  = ScoreBoardUpdateAnimation(led, timerSeconds, scrollDelay, homeName, awayName)
 anim.run()

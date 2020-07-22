@@ -24,7 +24,7 @@ class ScoreBoardUpdateAnimation(BaseStripAnim):
     homeSectionStart = 0
     homeSectionEnd   = 89
     homeSectionRows  = 5
-    homeName         = "A"
+    _homeName         = "Home"
 
     # timer section, start and end index of strip
     timerSectionStart = 90
@@ -35,7 +35,7 @@ class ScoreBoardUpdateAnimation(BaseStripAnim):
     awaySectionStart = 175
     awaySectionEnd   = 264
     awaySectionRows  = 5
-    awayName         = "B"
+    _awayName         = "Away"
 
     # score of home team section, start and end index of strip
     homeScoreSection1Start = 265
@@ -55,13 +55,14 @@ class ScoreBoardUpdateAnimation(BaseStripAnim):
     awayScoreSection2End   = 324
     awayScoreSection2Rows  = 5
 
-    def __init__(self, led, animationTime, delay):
+    def __init__(self, led, animationTime, delay, homeName, awayName):
         #The base class MUST be initialized by calling super like this
         super(BaseStripAnim, self).__init__(led)
         self._animationTime      = animationTime
         self._animationStartTime = time.time()
         self._delay              = delay
-
+        self._homeName           = homeName
+        self._awayName           = awayName
 
 
 
@@ -75,9 +76,7 @@ class ScoreBoardUpdateAnimation(BaseStripAnim):
 
         # draw all the sections
         self.drawHomeSection(self.homeSectionStart, self.homeSectionEnd, self.homeSectionRows)
-
         self.drawTimerSection(self.timerSectionStart, self.timerSectionEnd, self.timerSectionRows)
-
         self.drawAwaySection(self.awaySectionStart, self.awaySectionEnd, self.awaySectionRows)
 
         self.drawHomeScoreSection1(self.homeScoreSection1Start, self.homeScoreSection1End, self.homeScoreSection1Rows)
