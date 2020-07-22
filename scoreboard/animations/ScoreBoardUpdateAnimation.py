@@ -12,7 +12,7 @@ import threading
 
 class ScoreBoardUpdateAnimation(BaseStripAnim):
 
-    _scoresPath = "../../scores.json"
+    _scoresPath = "scores.json"
 
     # the delay between refreshing the scroll algorithm
     _delay   = 0.01
