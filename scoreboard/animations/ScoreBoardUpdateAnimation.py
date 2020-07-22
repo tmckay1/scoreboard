@@ -82,8 +82,8 @@ class ScoreBoardUpdateAnimation(BaseStripAnim):
         scores = "{}"
         with open(self._scoresPath) as f:
             scores = json.load(f)
-        self.awayScore = scores['awayScore']
-        self.homeScore = scores['homeScore']
+        self.awayScore = scores['away_score']
+        self.homeScore = scores['home_score']
 
         # draw all the sections
         self.drawHomeSection(self.homeSectionStart, self.homeSectionEnd, self.homeSectionRows)
