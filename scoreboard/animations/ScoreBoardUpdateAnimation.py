@@ -100,7 +100,7 @@ class ScoreBoardUpdateAnimation(BaseStripAnim):
     def drawHomeSection(self, startIndex, endIndex, rows):
 
         characterSet  = MessageCharacters5x3()
-        messageParser = StandardMessageParser(self.homeName,characterSet)
+        messageParser = StandardMessageParser(self._homeName,characterSet)
         word          = messageParser.getMessageMatrix()
 
         colorAlgorithm = RainbowColorAlgorithm()
@@ -134,7 +134,7 @@ class ScoreBoardUpdateAnimation(BaseStripAnim):
     def drawAwaySection(self, startIndex, endIndex, rows):
 
         characterSet  = MessageCharacters5x3()
-        messageParser = StandardMessageParser(self.awayName,characterSet)
+        messageParser = StandardMessageParser(self._awayName,characterSet)
         word          = messageParser.getMessageMatrix()
 
         colorAlgorithm = RainbowColorAlgorithm()
