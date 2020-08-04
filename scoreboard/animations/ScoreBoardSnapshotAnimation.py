@@ -23,8 +23,8 @@ class ScoreBoardSnapshotAnimation(BaseStripAnim):
     # time to end the animation
     _animationEndTime = None
 
-    # the duration of the animation in milliseconds
-    _duration = 10000
+    # the duration of the animation in seconds
+    _duration = 10
 
     # name of home team section, start and end index of strip
     homeSectionStart = 0
@@ -78,7 +78,7 @@ class ScoreBoardSnapshotAnimation(BaseStripAnim):
     def step(self, amt = 1):
 
         # end animation if over time
-        if time.time() - self._animationEndTime < 0:
+        if self._animationEndTime - time.time() < 0:
             self.stop()
 
         # draw all the sections
@@ -95,7 +95,7 @@ class ScoreBoardSnapshotAnimation(BaseStripAnim):
         self._step += amt
 
         # end animation if over time
-        if time.time() - self._animationEndTime < 0:
+        if self._animationEndTime - time.time() < 0:
             self.stop()
         
         time.sleep(self._scrollDelay)
