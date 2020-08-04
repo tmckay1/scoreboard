@@ -23,8 +23,8 @@ class ScoreBoardSnapshotAnimation(BaseStripAnim):
     # time to end the animation
     _animationEndTime = None
 
-    # the duration of the animation in seconds
-    _duration = 10
+    # the duration of the animation in milliseconds
+    _duration = 10000
 
     # name of home team section, start and end index of strip
     homeSectionStart = 0

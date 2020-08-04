@@ -19,7 +19,7 @@ homeName     = "Home"
 awayName     = "Away"
 homeScore    = 2
 awayScore    = 3
-duration     = 10
+duration     = 10000
 
 #run animation
 anim  = ScoreBoardSnapshotAnimation(led, timerDisplay, scrollDelay, homeName, awayName, homeScore, awayScore, duration)
