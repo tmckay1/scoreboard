@@ -1,7 +1,11 @@
 from bibliopixel.layout import *
 from scoreboard.animations.ScoreBoardSnapshotAnimation import ScoreBoardSnapshotAnimation # import the animation
 from bibliopixel.drivers.PiWS281X import *
+import scores
 import sys
+
+def getLiveMatches(matches):
+  return list(filter(lambda match: match.match_time != 'Match Finished', matches))
 
 #create biblio pixel driver and led
 thread             = False   # display updates to run in background thread
@@ -13,14 +17,22 @@ driver             = PiWS281X(numTeamNameNumLeds*2 + numTimerLeds + numScoreLeds
 led                = Strip(driver, thread, brightness)
 
 # setup animation
-scrollDelay  = 0.25
-timerDisplay = "9:33 4th"
-homeName     = "Home"
-awayName     = "Away"
-homeScore    = 2
-awayScore    = 3
+scrollDelay  = 0.05
 duration     = 10
 
 #run animation
-anim  = ScoreBoardSnapshotAnimation(led, timerDisplay, scrollDelay, homeName, awayName, homeScore, awayScore, duration)
-anim.run()
+while True:
+  # only baseball and basketball for now
+  matches     = sports.all_matches()
+  basketball  = getLiveMatches(matches['basketball'])
+  baseball    = getLiveMatches(matches['baseball'])
+  all_matches = basketball + baseball
+
+  for match in all_matches:
+    timerDisplay = match.match_time
+    homeName     = match.home_team
+    awayName     = match.away_team
+    homeScore    = match.home_score
+    awayScore    = match.away_score
+    anim         = ScoreBoardSnapshotAnimation(led, timerDisplay, scrollDelay, homeName, awayName, homeScore, awayScore, duration)
+    anim.run()
