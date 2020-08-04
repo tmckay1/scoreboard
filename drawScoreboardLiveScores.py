@@ -1,7 +1,7 @@
 from bibliopixel.layout import *
 from scoreboard.animations.ScoreBoardSnapshotAnimation import ScoreBoardSnapshotAnimation # import the animation
 from bibliopixel.drivers.PiWS281X import *
-import scores
+import sports
 import sys
 
 def getLiveMatches(matches):
