@@ -13,10 +13,13 @@ def getLiveMatches(all_matches):
   basketball = filterLiveMatches(matches['basketball'])
   baseball   = filterLiveMatches(matches['baseball'])
   all_matches['games'] = basketball + baseball
+  print("getLiveMatches")
+  print(all_matches)
 
 def getLiveMatchesAsync(all_matches):
   thread = Thread(target = getLiveMatches, args = (all_matches, ))
   thread.start()
+  return thread
 
 #create biblio pixel driver and led
 thread             = False   # display updates to run in background thread
@@ -39,7 +42,7 @@ getLiveMatches(all_matches)
 while True:
 
   async_matches = { "games": [] }
-  getLiveMatchesAsync(async_matches)
+  thread = getLiveMatchesAsync(async_matches)
 
   for match in all_matches['games']:
     timerDisplay = match.match_time
@@ -50,4 +53,6 @@ while True:
     anim         = ScoreBoardSnapshotAnimation(led, timerDisplay, scrollDelay, homeName, awayName, homeScore, awayScore, duration)
     anim.run()
 
+  # ensure we finish the previous thread before continuing
+  thread.join()
   all_matches = async_matches
