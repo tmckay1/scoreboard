@@ -1,11 +1,22 @@
 from bibliopixel.layout import *
 from scoreboard.animations.ScoreBoardSnapshotAnimation import ScoreBoardSnapshotAnimation # import the animation
 from bibliopixel.drivers.PiWS281X import *
+from threading import Thread
 import sports
 import sys
 
-def getLiveMatches(matches):
+def filterLiveMatches(matches):
   return list(filter(lambda match: match.match_time != 'Match Finished', matches))
+
+def getLiveMatches(all_matches):
+  matches    = sports.all_matches()
+  basketball = filterLiveMatches(matches['basketball'])
+  baseball   = filterLiveMatches(matches['baseball'])
+  all_matches['games'] = basketball + baseball
+
+def getLiveMatchesAsync(all_matches):
+  thread = Thread(target = getLiveMatches, args = (all_matches, ))
+  thread.start()
 
 #create biblio pixel driver and led
 thread             = False   # display updates to run in background thread
@@ -20,15 +31,17 @@ led                = Strip(driver, thread, brightness)
 scrollDelay  = 0.05
 duration     = 10
 
+# only baseball and basketball for now
+all_matches = { "games": [] }
+getLiveMatches(all_matches)
+
 #run animation
 while True:
-  # only baseball and basketball for now
-  matches     = sports.all_matches()
-  basketball  = getLiveMatches(matches['basketball'])
-  baseball    = getLiveMatches(matches['baseball'])
-  all_matches = basketball + baseball
 
-  for match in all_matches:
+  async_matches = { "games": [] }
+  getLiveMatchesAsync(async_matches)
+
+  for match in all_matches['games']:
     timerDisplay = match.match_time
     homeName     = match.home_team
     awayName     = match.away_team
@@ -36,3 +49,5 @@ while True:
     awayScore    = match.away_score
     anim         = ScoreBoardSnapshotAnimation(led, timerDisplay, scrollDelay, homeName, awayName, homeScore, awayScore, duration)
     anim.run()
+
+  all_matches = async_matches
