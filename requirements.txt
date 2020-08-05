@@ -1,2 +1,2 @@
 bibliopixel == 3.4.45
-sports == 2.0.10
+sports.py == 2.0.10
