@@ -1,5 +1,5 @@
 # scoreboard
-This program is used to light up a message board powered by a Raspberry Pi 3. To watch a how to video on setting up the circuit and controls go <a href="https://youtu.be/9_hFtRl67eU">here</a>.
+This program is used to light up a message board powered by a Raspberry Pi 3.
 
 ## Assumptions
 When writing this program I assumed:
